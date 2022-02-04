@@ -1,0 +1,7 @@
+<h1>
+  title
+</h1>
+<div>
+  <app-employee-mytasks [emp]="emp"></app-employee-mytasks>
+  <app-employee-notmytasks *ngFor="let emp of (employees | filter : notMeFilter)" [emp]=emp>loading Employee...</app-employee-notmytasks>
+</div>

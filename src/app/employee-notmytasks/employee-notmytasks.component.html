@@ -1,0 +1,9 @@
+<h1>
+  {{emp.name}}'s Tasks
+</h1>
+<ul>
+  <li *ngFor="let task of emp.tasks">
+    {{task.done ? "\u2713" : "x"}}
+    {{task.text}}
+  </li>
+</ul>

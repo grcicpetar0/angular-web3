@@ -1,0 +1,12 @@
+The app tracks each employee on weekly tasks. Daily, monthly and one time tasks are out of scope for version one.
+The app will work on phone, tablet, or PC browser, but will be visually optimized for phone.
+The app will allow the boss to add/delete a task for an employee.
+The app will email the boss a weekly report. Emails to others are out of scope.
+The app will store a historical record in a database. Automated queries are out of scope. Getting historical reports from the database will be manual.
+For all tasks, the employee has only 2 states: done or not. In progress and other states are out of scope.
+The graphic for done is a gold star and for not a gray faded star or a hollow star.
+Each employee will get a username and password. The app can remember them on the same device.
+Each employee will only be able check off his or her tasks.
+Each employee will be able to see all employees progress. TBD whether an employee sees all the details of other employees or just the weekly all done.
+When all employees are all done for the week, the app displays a special screen.
+The json doc at the heart of the app has no more than a dozen employees and no more than 3 tasks each.
