@@ -4,6 +4,10 @@ const WEB = __dirname.replace('server', 'dist');
 var express = require('express'); //have to have loaded this module onto your machine first
 var logger = require('morgan');
 var bodyParser = require('body-parser'); //NEW
+var flash = require('connect-flash');
+var passport = require('passport');
+var expressSession = require('express-session');
+
 
 var routes = require('./api.js');
 
@@ -16,8 +20,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 })); // for parsing application
+app.use(flash());
+app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use('/api', routes);
+
+// app.use(function (req, res, next) {
+//   console.log(`in my middleware, req.user:${req.user}`);
+//   next()
+// })
 
 app.use(express.static(WEB)); //this turns it into a server like Apache server that we were using before //secret sauce //will feed your html your images 
 

@@ -8,13 +8,22 @@ mongo.connect(url, function(err, db){
     var collection = db.collection('employees');
     collection.insertMany([
       {
-        name: "Sally Salamander"
+        name: "Sally Salamander",
+        username: "ssmander",
+        password: "lizardcity",
+        role: "employee"
       },
       {
-        name: "John Johnson"
+        name: "John Johnson",
+        username: "jjohnson",
+        password: "123456",
+        role: "employee"
       },
       {
-        name: "Catbert"
+        name: "Catbert",
+        username: "yournightmare",
+        password: "suffering",
+        role: "employer"
       }
     ], function(err, result){
       // console.log(result);

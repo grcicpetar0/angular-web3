@@ -61,7 +61,19 @@ exports.updateTask = function(taskid, done, callback) {
         callback(err, result);
       });
     })
+}
 
+exports.findUser = function(username, callback){
+    mongo.connect(url, function(err, db) {
+        if(err) callback(err);
+
+        var collection = db.collection('employees');
+
+        collection.findOne({username:username}, function(err, result){
+            db.close();
+            callback(err, result);
+        });
+    });
 }
 
 module.exports = exports;

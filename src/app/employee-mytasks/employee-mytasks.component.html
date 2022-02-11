@@ -1,8 +1,8 @@
 <h1>
-  {{emp.name}}'s Tasks
+  {{emp ? emp.name : "loading..."}}'s Tasks
 </h1>
 <ul>
-  <li *ngFor="let task of emp.tasks">
+  <li *ngFor="let task of (emp ? emp.tasks : [])">
     <input type="checkbox" (click)="toggleDone(task)"  [(ngModel)]="task.done">
     {{task.text}}
   </li>
