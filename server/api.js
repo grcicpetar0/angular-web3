@@ -3,6 +3,17 @@ var router = express.Router();
 var dao = require('./mongo-dao.js');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var jwtStrategy = require('passport-jwt').Strategy;
+var extractJwt = require('passport-jwt').ExtractJwt;
+var jwt = require('jsonwebtoken');
+
+passport.use(new jwtStrategy({jwtFromRequest: extractJwt.fromBodyField("token"), secretOrKey: "secret"}, function(payload, done){
+  dao.findUser(payload.username, function(err, user){
+    if(err) return done(err, false);
+    if(user) done(null, user);
+    else done(null, false);
+  })
+}))
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -26,8 +37,15 @@ router.post('/login',
                                 //    failureFlash: true })
     function(req, res) {
         // console.log(`in passport.authenticateCALLBACK, req.user: ${JSON.stringify(req.user)}`);
-        res.send(req.user);
+      req.user.token = jwt.sign(req.user, "secret");
+      res.send(req.user);
 });
+
+router.post('/tokenLogin',
+  passport.authenticate('jwt'), function (req, res){
+    res.send(req.user);
+  }
+);
 
 passport.serializeUser(function(user, cb) {
     // console.log(`in serialize, user: ${JSON.stringify(user)}`);
@@ -45,8 +63,8 @@ passport.deserializeUser(function(username, cb) {
 router.get('/employees', function(req, res){
     dao.getAll(function(err, emps){
         if (err) throw err;
-        res.send(emps);
         // console.log(emps);
+        res.send(emps);
         // res.sendStatus(200);
     });
 })

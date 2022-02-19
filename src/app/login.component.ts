@@ -4,14 +4,17 @@ import { AuthService } from './auth.service';
 
 @Component({
   template: `
-    <h2>LOGIN</h2>
-    <p>{{message}}</p>
-    <div>
-      <div *ngIf="!authService.isLoggedIn">
-        <span>Username:<input #user type="text">Password:<input #pass type="text"></span>
-        <button (click)="login(user.value, pass.value)" >Login</button>
-      </div>
-      <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+    <h2 *ngIf="authService.checkingToken">Loading...</h2>
+    <div #elseBlock>
+        <h2>LOGIN</h2>
+        <p>{{message}}</p>
+        <div>
+        <div *ngIf="!authService.isLoggedIn">
+            <span>Username:<input #user type="text">Password:<input #pass type="password"></span>
+            <button (click)="login(user.value, pass.value)" >Login</button>
+        </div>
+        <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+        </div>
     </div>`
 })
 export class LoginComponent {

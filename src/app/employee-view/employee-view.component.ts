@@ -26,5 +26,5 @@ export class EmployeeViewComponent {
   emp;
   
   notMeFilter = (e)=> e._id !== this.auth.empInfo._id;
-
+  allDone = () => this.emp && !this.emp.tasks.some(t=>!t.done);
 }

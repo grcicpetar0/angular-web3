@@ -4,11 +4,13 @@
 <ul>
   <li *ngFor="let task of emp.tasks">
     <button (click)="remove(task)">x</button>
+    {{task.recurring ? "R" : " "}}
     {{task.done ? "\u2713" : "x"}}
     {{task.text}}
   </li>
   <li>
     <button (click)="add(newTask.value); newTask.value = ''">+</button>
+    <span (click)="newItemIsRecurring = !newItemIsRecurring">{{newItemIsRecurring ? "R" : "r"}}</span>
     <input #newTask type="text" (keyup.enter)="add(newTask.value); newTask.value = ''"/>
   </li>
 </ul>

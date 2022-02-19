@@ -2,5 +2,17 @@
   title
 </h1>
 <div>
+  <div *ngIf="allDone()">All employees done</div>
   <app-employee-manage *ngFor="let emp of employees" [emp]=emp>loading Employee...</app-employee-manage>
+  <div>
+    <h3>
+      Add To Multiple
+    </h3>
+    <div *ngFor="let emp of employees">
+      <input type="checkbox" #selected (click)="setSelectedEmp(emp._id, selected.checked)">{{emp.name}}
+    </div>
+    <button (click)="add(newTask.value); newTask.value = ''">+</button>
+    <span (click)="newItemIsRecurring = !newItemIsRecurring">{{newItemIsRecurring ? "R" : "r"}}</span>
+    <input #newTask type="text" (keyup.enter)="add(newTask.value); newTask.value = ''"/>
+  </div>
 </div>

@@ -30,15 +30,15 @@ mongo.connect(url, function(err, db){
       db.dropCollection('tasks', function(){
         var taskCollection = db.collection('tasks');
         taskCollection.insertMany([
-          {text:"clean computers", done:true, empid:result.insertedIds[0]},
-          {text:"email frank", done:false, empid:result.insertedIds[0]},
-          {text:"make invoice", done:false, empid:result.insertedIds[0]},
-          {text:"clean toilet", done:false, empid:result.insertedIds[1]},
-          {text:"take out trash", done:false, empid:result.insertedIds[1]},
-          {text:"mop floors", done:false, empid:result.insertedIds[1]},
-          {text:"Fire Dilbert", done:false, empid:result.insertedIds[2]},
-          {text:"Cackle", done:true, empid:result.insertedIds[2]},
-          {text:"Yell at Wally", done:false, empid:result.insertedIds[2]}
+          {text:"clean computers", done:true, empid:result.insertedIds[0], recurring:false},
+          {text:"email frank", done:false, empid:result.insertedIds[0], recurring:false},
+          {text:"make invoice", done:false, empid:result.insertedIds[0], recurring:false},
+          {text:"clean toilet", done:false, empid:result.insertedIds[1], recurring:false},
+          {text:"take out trash", done:false, empid:result.insertedIds[1], recurring:true},
+          {text:"mop floors", done:false, empid:result.insertedIds[1], recurring:true},
+          {text:"Fire Dilbert", done:false, empid:result.insertedIds[2], recurring:true},
+          {text:"Cackle", done:true, empid:result.insertedIds[2], recurring:true},
+          {text:"Yell at Wally", done:false, empid:result.insertedIds[2], recurring:true}
         ], function(err, result){
           db.close();
         })
