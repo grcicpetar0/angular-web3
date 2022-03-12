@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 @Component({
   selector: 'app-employee-mytasks',
   templateUrl: './employee-mytasks.component.html',
-  styleUrls: ['./employee-mytasks.component.css']
+  styleUrls: ['./employee-mytasks.component.css'],
 })
 export class EmployeeMytasksComponent {
   constructor(private http: Http) { }

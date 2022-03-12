@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 })); // for parsing application
 app.use(flash());
-app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(expressSession({ secret: nconf.get("sessionSecret"), resave: false, saveUninitialized: false }));
 
 
 // app.use(function (req, res, next) {
@@ -40,14 +40,15 @@ app.use(passport.session());
 app.use('/api', routes);
 
 app.use(express.static(WEB)); //this turns it into a server like Apache server that we were using before //secret sauce //will feed your html your images
+app.use(express.static(__dirname.replace('server', 'node_modules/@angular/material/prebuilt-themes')));
 
 app.get('*', function(req, res) {
     res.status(404).sendFile(WEB + '/index.html');
 });
 
 
-var server = app.listen('8080', '127.0.0.1', function() {
-    console.log(`Server listening on 127.0.0.1:8080`);
+var server = app.listen(nconf.get("port"), nconf.get("ip"), function() {
+    console.log(`Server listening on ${nconf.get("ip")}:${nconf.get("port")}`);
 });
 
 function gracefullShutdown() {
@@ -84,7 +85,7 @@ let mailOptions = {
     text: '.....', // plain text body
 };
                     //0:0:0 any day, any month, on Mondays
-// schedule.scheduleJob('0 0 0 * * 1', function(){
+schedule.scheduleJob('0 0 0 * * 1', function(){
     // send mail with defined transport object
     dao.getAll(function(err, emps){
         if (err) console.log(err);
@@ -108,5 +109,5 @@ let mailOptions = {
             console.log(err);
           }
         })
-    // });
+    });
 });

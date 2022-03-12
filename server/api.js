@@ -6,8 +6,11 @@ var LocalStrategy = require('passport-local').Strategy;
 var jwtStrategy = require('passport-jwt').Strategy;
 var extractJwt = require('passport-jwt').ExtractJwt;
 var jwt = require('jsonwebtoken');
+const nconf = require('nconf');
 
-passport.use(new jwtStrategy({jwtFromRequest: extractJwt.fromBodyField("token"), secretOrKey: "secret"}, function(payload, done){
+nconf.argv().env().file({file: 'config.json'});
+
+passport.use(new jwtStrategy({jwtFromRequest: extractJwt.fromBodyField("token"), secretOrKey: nconf.get("jwtSecret")}, function(payload, done){
   dao.findUser(payload.username, function(err, user){
     if(err) return done(err, false);
     if(user) done(null, user);
@@ -34,10 +37,10 @@ passport.use(new LocalStrategy(
 
 router.post('/login',
   passport.authenticate('local'),
-                                //    failureFlash: true })
+  // {failureFlash:true},
     function(req, res) {
         // console.log(`in passport.authenticateCALLBACK, req.user: ${JSON.stringify(req.user)}`);
-      req.user.token = jwt.sign(req.user, "secret");
+      req.user.token = jwt.sign(req.user, nconf.get("jwtSecret"));
       res.send(req.user);
 });
 

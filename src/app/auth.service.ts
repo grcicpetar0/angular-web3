@@ -23,6 +23,7 @@ export class AuthService {
         })
         .catch(function(err){
           console.log(err);
+          this.checkingToken = false;
         })
     } else {
         this.checkingToken = false;

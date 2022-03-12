@@ -1,18 +1,27 @@
 <h1>
-  title
+  Weekly Todo Manager
 </h1>
 <div>
-  <div *ngIf="allDone()">All employees done</div>
+  <md-card *ngIf="allDone()">All employees done!</md-card>
   <app-employee-manage *ngFor="let emp of employees" [emp]=emp>loading Employee...</app-employee-manage>
   <div>
     <h3>
       Add To Multiple
     </h3>
-    <div *ngFor="let emp of employees">
-      <input type="checkbox" #selected (click)="setSelectedEmp(emp._id, selected.checked)">{{emp.name}}
-    </div>
-    <button (click)="add(newTask.value); newTask.value = ''">+</button>
-    <span (click)="newItemIsRecurring = !newItemIsRecurring">{{newItemIsRecurring ? "R" : "r"}}</span>
-    <input #newTask type="text" (keyup.enter)="add(newTask.value); newTask.value = ''"/>
+    <md-list>
+      <md-list-item *ngFor="let emp of employees">
+        <!--<md-checkbox #selected (click)="setSelectedEmp(emp._id, selected.checked)">{{emp.name}}</md-checkbox>-->
+        <md-checkbox [(ngModel)]="selectedEmps[emp._id]">{{emp.name}}</md-checkbox>
+      </md-list-item>
+      <md-list-item>
+        <button md-mini-fab (click)="add(newTask.value); newTask.value = ''">+</button>
+        <span (click)="newItemIsRecurring = !newItemIsRecurring">
+          <md-icon [style.color]="newItemIsRecurring ? 'inherit' : 'gray'">autorenew</md-icon>
+        </span>
+        <md-input-container>
+          <input mdInput placeholder="New Task" #newTask type="text" (keyup.enter)="add(newTask.value); newTask.value = ''"/>
+        </md-input-container>
+      </md-list-item>
+    </md-list>
   </div>
 </div>

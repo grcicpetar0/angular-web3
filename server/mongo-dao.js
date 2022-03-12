@@ -2,9 +2,12 @@ var _ = require('lodash');
 var mongoall = require('mongodb');
 var mongo = mongoall.MongoClient;
 var o_id = mongoall.ObjectID;
+const nconf = require('nconf');
+
+nconf.argv().env().file({file: 'config.json'});
 
 
-var url = 'mongodb://localhost:27017/EmpTodos';
+var url = `mongodb://${nconf.get("mongoHost")}/EmpTodos`;
 
 var exports;
 

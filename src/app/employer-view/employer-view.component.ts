@@ -23,7 +23,7 @@ export class EmployerViewComponent {
   add(taskToAdd){
     // console.log("adding task" + taskToAdd);
     // console.log("employees " + JSON.stringify(this.employees));
-    // console.log("selected emps" + JSON.stringify(this.selectedEmps));
+    console.log("selected emps" + JSON.stringify(this.selectedEmps));
 
     let wasRecurring  = this.newItemIsRecurring;
     this.newItemIsRecurring = false;
@@ -51,8 +51,4 @@ export class EmployerViewComponent {
   newItemIsRecurring = false;
 
   selectedEmps = {};
-
-  setSelectedEmp(empId, selected){
-    this.selectedEmps[empId] = selected;
-  }
 }

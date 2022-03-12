@@ -1,9 +1,9 @@
 -The app tracks each employee on weekly tasks. Daily, monthly and one time tasks are out of scope for version one.
-The app will work on phone, tablet, or PC browser, but will be visually optimized for phone.
+-The app will work on phone, tablet, or PC browser, but will be visually optimized for phone.
 -The app will allow the boss to add/delete a task for an employee.
 -The app will email the boss a weekly report. Emails to others are out of scope.
     README - may need to enable "less secure" mode in gmail
-The app will store a historical record in a database. Automated queries are out of scope. Getting historical reports from the database will be manual.
+-The app will store a historical record in a database. Automated queries are out of scope. Getting historical reports from the database will be manual.
 -For all tasks, the employee has only 2 states: done or not. In progress and other states are out of scope.
 The graphic for done is a gold star and for not a gray faded star or a hollow star.
 -Each employee will get a username and password. 
@@ -14,9 +14,11 @@ The graphic for done is a gold star and for not a gray faded star or a hollow st
 
 configuration via config file
 
-new add functionility - multiple employees at once
-add recurring field to each task
-    recurring tasks will not be removed at end of week, will set done to false
+-new add functionility - multiple employees at once
+-add recurring field to each task
+    -recurring tasks will not be removed at end of week, will set done to false
+
+employer complete own todos
 
 create new account functionality
 dont send passwords around

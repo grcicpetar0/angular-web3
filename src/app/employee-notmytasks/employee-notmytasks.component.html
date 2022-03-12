@@ -1,10 +1,11 @@
-<h1>
+<h2>
   {{emp.name}}'s Tasks
-</h1>
-<ul>
-  <li *ngFor="let task of emp.tasks">
-    {{task.recurring ? "R" : " "}}
-    {{task.done ? "\u2713" : "x"}}
+</h2>
+<md-list>
+  <md-list-item *ngFor="let task of emp.tasks">
+    <md-icon [style.color]="task.recurring ? 'inherit' : 'transparent'">autorenew</md-icon>
+    <md-icon *ngIf="task.done">check</md-icon>
+    <md-icon *ngIf="!task.done">clear</md-icon>
     {{task.text}}
-  </li>
-</ul>
+  </md-list-item>
+</md-list>
